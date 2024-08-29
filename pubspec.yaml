@@ -30,27 +30,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  dash_chat_2: ^0.0.21
+  http: any  # Specify the version you want or keep it to `any`
+  google_generative_ai: ^0.4.5
+  flutter_gemini: ^2.0.5
+  image_picker: ^1.1.2
+  google_mobile_ads: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^3.0.0
-  dash_chat_2: ^0.0.21
-  http:
-  google_generative_ai: ^0.4.5
-  flutter_gemini: ^2.0.5
-  image_picker: ^1.1.2
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/lodo.png"
+  adaptive_icon_background: "assets/alhijrah.jpg"
+  adaptive_icon_foreground: "assets/alhijrah.jpg"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart'; // Ensure this is the correct import
+import 'package:flutter/widgets.dart';
 import '../consts.dart'; // Ensure this contains the Gemini_KEY
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class ChatPage extends StatefulWidget {
   @override
@@ -9,6 +12,46 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+
+  BannerAd? _bannerAd;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Create a banner ad
+    _bannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) => print('Ad loaded.'),
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+
+    // Load the banner ad
+    _bannerAd?.load();
+  }
+
+  @override
+  void dispose() {
+    // Dispose the ad to free up resources
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+
+
+
+
+
+
+
+
+
   final ChatUser geminiUser = ChatUser(
     id: '2',
     firstName: 'Gemini',
@@ -49,13 +92,14 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ],
         ),
-        actions: [
+        actions: const [
           CircleAvatar(
             backgroundImage: AssetImage('assets/logo.png'),
           ),
         ],
       ),
       body: Stack(
+
         fit: StackFit.expand,
         children: [
           Image.asset(
@@ -83,6 +127,18 @@ class _ChatPageState extends State<ChatPage> {
             ),
             onSend: _handleSend,
             messages: chatMessages,
+          ),
+
+
+          Center(
+            child: _bannerAd == null
+            ? const CircularProgressIndicator()
+            : Container(
+                alignment: Alignment.center,
+                width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd!),
+              ),
           ),
         ],
       ),
@@ -112,6 +168,8 @@ Future<void> getChats(ChatMessage message) async {
         completeResponse += responsePart;
       }
     }
+
+    
 
  
     setState(() {
