@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'Screens/chatMyPage.dart';
+import 'Screens/bottom_bar.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-  runApp(MyApp());
+    runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
